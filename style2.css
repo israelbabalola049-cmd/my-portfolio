@@ -535,30 +535,10 @@ p {
   font-size: 1.8rem;
   font-weight: 700;
   color: #aaa;
-  quotes: '“' '”';
   position: relative;
   user-select: none;
   letter-spacing: 0.05em;
 }
-
-.code-sniper::before {
-  content: open-quote;
-  color: #666;
-  font-size: 2.5rem;
-  position: absolute;
-  left: -18px;
-  top: -10px;
-}
-
-.code-sniper::after {
-  content: close-quote;
-  color: #666;
-  font-size: 2.5rem;
-  position: absolute;
-  right: -18px;
-  bottom: -10px;
-}
-
 /* Skill Bar Text and Percentage */
 .skill-bar p {
   font-weight: 600;
@@ -620,3 +600,4 @@ p {
     position: static;
   }
 }
+
