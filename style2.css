@@ -582,6 +582,12 @@ p {
 /* Add some margin bottom to last skill bar */
 .skill-bar:last-child {
   margin-bottom: 40px;
+
+.skill-note{
+    font-size: 0.9rem;
+  color: #777;
+  font-style: italic;
+}
 }
 
 /* Add a bit of responsive tweak for smaller screens */
@@ -600,4 +606,5 @@ p {
     position: static;
   }
 }
+
 
