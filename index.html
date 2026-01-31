@@ -3,292 +3,372 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Israel Olamide Babalola | Portfolio</title>
+  <title>Israel Olamide Babalola | Software Developer</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Smooth scroll indicator -->
-  <div class="scroll-progress"></div>
-
-  <!-- Mobile Hamburger -->
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#hero" onclick="closeMenu()">Home</a>
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#projects" onclick="closeMenu()">Projects</a>
-    <a href="#skills" onclick="closeMenu()">Skills</a>
-    <a href="#experience" onclick="closeMenu()">Experience</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
-  </div>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-brand">Israel Babalola</div>
+      <div class="nav-menu" id="navMenu">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero-background"></div>
-    <div class="hero-glass-full fade-in">
-      <h1>Hi, I'm Israel Olamide Babalola</h1>
-      <h3>Aspiring Software Developer | AI Enthusiast | Full-Stack Explorer</h3>
-      <p class="tagline">
-        Turning ideas into digital experiences, one line of code at a time.
-        Welcome to my world of tech, creativity, and innovation.
-      </p>
-      <a href="#contact" class="cta-btn">Let's Collaborate</a>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Israel Olamide Babalola</h1>
+        <h2 class="hero-subtitle">Aspiring Software Developer | AI Enthusiast | Full-Stack Explorer</h2>
+        <p class="hero-description">
+          Turning ideas into digital experiences, one line of code at a time.
+          Welcome to my world of tech, creativity, and innovation.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get In Touch</a>
+          <a href="#projects" class="btn btn-secondary">View Work</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section class="about" id="about">
-    <h2 class="fade-in">About Me</h2>
-    <p class="fade-in delay1">
-      I'm Israel Olamide Babalola, a Computer Science student who loves building
-      smart solutions and digital experiences. I'm passionate about AI,
-      full-stack development, and creating tools that solve problems. I learn
-      by doing — building, testing, breaking, and improving. I'm also strategic
-      about growth, I'm always trying to level up my skills while balancing
-      deep thinking and practicality.
-    </p>
-    <p class="fade-in delay2">
-      Beyond coding, I explore music, art, creative projects, and expressive
-      ideas. I mainly just like to connect ideas from different areas and
-      seeing how they fit together. Integrity, consistency, and growth are core
-      to how I operate. I value the struggle that leads to mastery over
-      shortcuts any day.
-    </p>
+  <section class="about section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I'm Israel Olamide Babalola, a Computer Science student who loves building
+            smart solutions and digital experiences. I'm passionate about AI,
+            full-stack development, and creating tools that solve problems. I learn
+            by doing — building, testing, breaking, and improving. I'm also strategic
+            about growth, I'm always trying to level up my skills while balancing
+            deep thinking and practicality.
+          </p>
+          <p>
+            Beyond coding, I explore music, art, creative projects, and expressive
+            ideas. I mainly just like to connect ideas from different areas and
+            seeing how they fit together. Integrity, consistency, and growth are core
+            to how I operate. I value the struggle that leads to mastery over
+            shortcuts any day.
+          </p>
+        </div>
+        <div class="about-profile">
+          <img src="IMG_7767.jpeg" alt="Israel Olamide Babalola" class="profile-image" />
+          <div class="profile-details">
+            <h3>Israel Babalola</h3>
+            <p class="profile-role">Software Developer</p>
+            <p class="profile-location">Ikenne, Ogun State, Nigeria</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="experience section" id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Student Web Developer</h3>
+              <span class="timeline-date">2024 — Present</span>
+            </div>
+            <p class="timeline-company">Babcock University</p>
+            <ul class="timeline-list">
+              <li>Designing and building responsive web applications as part of academic work and independent learning as a Computer Science student</li>
+              <li>Applying core frontend technologies such as HTML, CSS, and JavaScript to translate ideas and requirements into functional user interfaces</li>
+              <li>Writing structured, readable code while gradually adopting clean code principles and best practices</li>
+              <li>Using Git and GitHub for version control, project organization, and tracking progress across multiple projects</li>
+              <li>Actively refining projects through iteration, debugging, and feedback to improve both functionality and user experience</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Projects Section -->
-  <section class="projects" id="projects">
-    <h2 class="fade-in">Projects</h2>
+  <section class="projects section" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        
+        <div class="project-item">
+          <div class="project-header">
+            <h3>Kairos: Health & Wellness Platform</h3>
+            <a href="https://www.kairoswellnesscollective.com" target="_blank" class="project-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="project-description">
+            Kairos is a health and wellness platform. We collaborated on creating
+            holistic wellness solutions, integrating physical, mental, and spiritual
+            health strategies.
+          </p>
+          <div class="project-tech">
+            <span>Web Development</span>
+            <span>UI/UX</span>
+            <span>Wellness Tech</span>
+          </div>
+        </div>
 
-    <div class="project fade-in delay1">
-      <h3>Kairos: Health & Wellness Platform</h3>
-      <p>
-        Kairos is a health and wellness platform. We collaborated on creating
-        holistic wellness solutions, integrating physical, mental, and spiritual
-        health strategies.
-      </p>
-      <a href="https://www.kairoswellnesscollective.com" class="project-link" target="_blank"
-        >View Project</a
-      >
-    </div>
+        <div class="project-item">
+          <div class="project-header">
+            <h3>Debsteph Hall School Website</h3>
+            <a href="https://israelbabalola049-cmd.github.io/debstephhall.github.io/" target="_blank" class="project-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="project-description">
+            Redesigned and enhanced my mother's school website for better usability,
+            aesthetic appeal, and modern responsiveness using HTML, CSS, and JavaScript.
+          </p>
+          <div class="project-tech">
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+            <span>Responsive Design</span>
+          </div>
+        </div>
 
-    <div class="project fade-in delay2">
-      <h3>Portfolio Website</h3>
-      <p>
-        This site is a modern, responsive portfolio showcasing my skills,
-        projects, and story as a tech enthusiast and aspiring developer.
-      </p>
-      <a href="#" class="project-link">View Project</a>
-    </div>
+        <div class="project-item">
+          <div class="project-header">
+            <h3>Portfolio Website</h3>
+            <a href="#" class="project-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="project-description">
+            A modern, responsive portfolio showcasing my skills, projects, and story 
+            as a tech enthusiast and aspiring developer.
+          </p>
+          <div class="project-tech">
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+            <span>Modern Design</span>
+          </div>
+        </div>
 
-    <div class="project fade-in delay3">
-      <h3>Debsteph Hall School Website</h3>
-      <p>
-        Redesigned and enhanced my mother's school website for better usability,
-        aesthetic appeal, and modern responsiveness using HTML, CSS, and
-        JavaScript.
-      </p>
-      <a
-        href="https://israelbabalola049-cmd.github.io/debstephhall.github.io/"
-        class="project-link"
-        target="_blank"
-        >View Project</a
-      >
+      </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section class="expertise" id="skills">
-    <h2 class="fade-in">Expertise</h2>
-
-    <div class="skills-profile fade-in delay1">
-      <img src="IMG_7767.jpeg" alt="Israel Olamide Babalola" class="profile-pic" />
-      <div class="profile-info">
-        <p class="code-sniper">"code-sniper"</p>
+  <section class="skills section" id="skills">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-intro">
+        <p class="code-tag">&lt;code-sniper /&gt;</p>
+        <p class="skills-note">Performance metrics from academic assessments and project work</p>
       </div>
-    </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Frontend Development</h3>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>HTML5 / CSS3 / JavaScript (ES6+)</span>
+              <span class="skill-percentage">80%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="80"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Responsive Design</span>
+              <span class="skill-percentage">83%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="83"></div>
+            </div>
+          </div>
+        </div>
 
-    <div class="skill-bar fade-in delay2">
-      <p>HTML5 / CSS3 / JS (ES6+)</p>
-      <div class="bar"><div class="fill" data-width="80%"><span class="percent">80%</span></div></div>
-    </div>
+        <div class="skill-group">
+          <h3>Backend & Database</h3>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Node.js / APIs</span>
+              <span class="skill-percentage">67%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="67"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>SQL</span>
+              <span class="skill-percentage">59%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="59"></div>
+            </div>
+          </div>
+        </div>
 
-    <div class="skill-bar fade-in delay3">
-      <p>Responsive Design</p>
-      <div class="bar"><div class="fill" data-width="83%"><span class="percent">83%</span></div></div>
-    </div>
+        <div class="skill-group">
+          <h3>Programming Languages</h3>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Python</span>
+              <span class="skill-percentage">74%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="74"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>C / C++</span>
+              <span class="skill-percentage">71%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="71"></div>
+            </div>
+          </div>
+        </div>
 
-    <div class="skill-bar fade-in delay4">
-      <p>Git/Github & Version Control</p>
-      <div class="bar"><div class="fill" data-width="78%"><span class="percent">78%</span></div></div>
-    </div>
-
-    <div class="skill-bar fade-in delay5">
-      <p>Node.js / APIs</p>
-      <div class="bar"><div class="fill" data-width="67%"><span class="percent">67%</span></div></div>
-    </div>
-
-    <div class="skill-bar fade-in delay6">
-      <p>SQL</p>
-      <div class="bar"><div class="fill" data-width="59%"><span class="percent">59%</span></div></div>
-    </div>
-
-    <div class="skill-bar fade-in delay7">
-      <p>Python</p>
-      <div class="bar"><div class="fill" data-width="74%"><span class="percent">74%</span></div></div>
-    </div>
-
-    <div class="skill-bar fade-in delay8">
-      <p>C / C++</p>
-      <div class="bar"><div class="fill" data-width="71%"><span class="percent">71%</span></div></div>
-    </div>
-
-    <div class="skill-bar fade-in delay9">
-      <p>Data Structures & Algorithms</p>
-      <div class="bar"><div class="fill" data-width="77%"><span class="percent">77%</span></div></div>
-    </div>
-
-    <div class="skill-bar fade-in delay10">
-      <p>CLI</p>
-      <div class="bar"><div class="fill" data-width="82%"><span class="percent">82%</span></div></div>
-    </div>
-    <p class="skill-note">
-    These findings reflect performance across several academic assessments and other sources.
-    </p>
-  </section>
-
-  <!-- Experience Section -->
-  <section class="experience" id="experience">
-    <h2 class="fade-in">Experience</h2>
-    <p class="fade-in delay1">Where I've applied my skills so far</p>
-
-    <div class="experience-item fade-in delay2">
-      <h3>Student Web Developer — Babcock University</h3>
-      <p class="experience-date">2024 – Present</p>
-      <ul>
-        <li>
-          Designing and building responsive web applications as part of my
-          academic work and independent learning as a Computer Science student
-        </li>
-        <li>
-          Applying core frontend technologies such as
-          <strong>HTML, CSS, and JavaScript</strong> to translate ideas and
-          requirements into functional user interfaces
-        </li>
-        <li>
-          Writing structured, readable code while gradually adopting clean code
-          principles and best practices
-        </li>
-        <li>
-          Using <strong>Git and GitHub</strong> for version control, project
-          organization, and tracking progress across multiple projects
-        </li>
-        <li>
-          Actively refining projects through iteration, debugging, and feedback
-          to improve both functionality and user experience
-        </li>
-      </ul>
-      <p class="experience-note">
-        This experience includes coursework, personal projects, and continuous
-        self-driven practice while studying at Babcock University.
-      </p>
-    </div>
-  </section>
-
-  <!-- Current Focus Section -->
-  <section class="current-focus" id="current-focus">
-    <p class="fade-in lead-in">A snapshot of where I am right now</p>
-    <h2 class="fade-in">Current Focus</h2>
-
-    <div class="focus-cards">
-      <div class="focus-card fade-in delay1">
-        <h3>🛠 Building</h3>
-        <p>
-          Working on small to medium-scale web projects that strengthen my
-          understanding of frontend development, improve my problem-solving
-          skills, and reinforce good development habits.
-        </p>
-      </div>
-      <div class="focus-card fade-in delay2">
-        <h3>📚 Learning</h3>
-        <p>
-          Deepening my knowledge of <strong>JavaScript</strong>, data
-          structures, and foundational computer science concepts through a
-          combination of coursework, documentation, and hands-on experimentation.
-        </p>
-      </div>
-      <div class="focus-card fade-in delay3">
-        <h3>🎯 Aiming For</h3>
-        <p>
-          Actively seeking <strong>internship opportunities</strong> where I
-          can learn from experienced developers, gain exposure to real-world
-          software development workflows, and contribute positively to a
-          collaborative team environment.
-        </p>
+        <div class="skill-group">
+          <h3>Tools & Technologies</h3>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Git / GitHub & Version Control</span>
+              <span class="skill-percentage">78%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="78"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>CLI / Command Line</span>
+              <span class="skill-percentage">82%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="82"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Data Structures & Algorithms</span>
+              <span class="skill-percentage">77%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="77"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <h2 class="fade-in">Let's Collaborate</h2>
-    <p class="fade-in delay1">
-     You can hit me up at anytime, i'm always excited to connect, innovate, and create meaningful ideas
-      with passionate people.
-    </p>
-    <div class="contact-details fade-in delay2">
-      <p>Email: israelbabalola049@gmail.com</p>
-      <p>Phone: +234 (0) 9151980801</p>
-      <p>
-        LinkedIn:
-        <a
-          href="https://www.linkedin.com/in/israel-babalola-629b5837b"
-          target="_blank"
-          >linkedin.com/in/israel-babalola-629b5837b</a
-        >
-      </p>
+  <section class="contact section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <p class="contact-intro">
+            I'm always excited to connect, innovate, and create meaningful ideas
+            with passionate people. Whether you have a project in mind, an opportunity,
+            or just want to chat about tech, feel free to reach out.
+          </p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <div>
+                <span class="label">Email</span>
+                <a href="mailto:israelbabalola049@gmail.com">israelbabalola049@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <div>
+                <span class="label">Phone</span>
+                <a href="tel:+2349151980801">+234 (0) 915 198 0801</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              <div>
+                <span class="label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/israel-babalola-629b5837b" target="_blank">israel-babalola-629b5837b</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" action="https://formspree.io/f/myzlzqlz" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group">
+            <select name="subject" required>
+              <option value="" disabled selected>Subject</option>
+              <option value="Project Inquiry">Project Inquiry</option>
+              <option value="Collaboration">Collaboration Opportunity</option>
+              <option value="Job Opportunity">Job / Internship Opportunity</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
     </div>
-
-    <!-- Contact Form -->
-    <form
-      class="contact-form fade-in delay3"
-      action="https://formspree.io/f/myzlzqlz"
-      method="POST"
-    >
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <select name="subject" required>
-        <option value="" disabled selected>Subject</option>
-        <option value="Project Inquiry">Project Inquiry</option>
-        <option value="Collaboration">Collaboration</option>
-        <option value="Job Opportunity">Job Opportunity</option>
-      </select>
-      <textarea
-        name="message"
-        placeholder="Your Message"
-        rows="5"
-        required
-      ></textarea>
-      <button type="submit">Send Message</button>
-    </form>
   </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Israel Olamide Babalola. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
 
 
 
