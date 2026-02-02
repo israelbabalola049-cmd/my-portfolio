@@ -418,35 +418,26 @@ body {
 
 .about-profile {
   text-align: center;
-  background: var(--color-tertiary);
-  padding: 2rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
   position: sticky;
   top: 100px;
 }
 
-.profile-details h3 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-text-primary);
+.about-profile-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  transition: var(--transition);
 }
 
-.profile-role {
-  color: var(--color-accent);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+.about-profile-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.3);
 }
 
-.profile-location {
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-}
-
+/* Hide profile image on mobile */
 @media (max-width: 968px) {
   .about-content {
     grid-template-columns: 1fr;
@@ -454,12 +445,12 @@ body {
   }
   
   .about-profile {
-    position: static;
+    display: none;
   }
 }
 
 /* ============================================
-   Expertise Section (formerly Skills)
+   Expertise Section - Technologies Grid
    ============================================ */
 .expertise {
   background: var(--color-primary);
@@ -482,6 +473,96 @@ body {
   font-size: 0.9rem;
 }
 
+/* Technologies Section */
+.technologies-section {
+  margin-bottom: 4rem;
+}
+
+.technologies-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.technologies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.tech-item:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+}
+
+.tech-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.tech-icon svg {
+  width: 100%;
+  height: 100%;
+  transition: var(--transition);
+}
+
+.tech-item:hover .tech-icon svg {
+  transform: scale(1.1);
+}
+
+.tech-item span {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .technologies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .tech-item {
+    padding: 1rem;
+  }
+  
+  .tech-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .tech-item span {
+    font-size: 0.8rem;
+  }
+}
+
+/* Skills Grid */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
