@@ -233,41 +233,46 @@ window.addEventListener('scroll', () => {
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
-navToggle.addEventListener('click', () => {
-  navToggle.classList.toggle('active');
-  navMenu.classList.toggle('active');
-  document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-});
-
-navMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navToggle.classList.remove('active');
-    navMenu.classList.remove('active');
-    document.body.style.overflow = '';
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
   });
-});
 
-document.addEventListener('click', (e) => {
-  if (!navMenu.contains(e.target) && !navToggle.contains(e.target) && navMenu.classList.contains('active')) {
-    navToggle.classList.remove('active');
-    navMenu.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-});
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !navToggle.contains(e.target) && navMenu.classList.contains('active')) {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
 
 // ============================================
 // Smooth Scrolling
 // ============================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const offsetTop = target.offsetTop - 70;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+    const href = this.getAttribute('href');
+    if (href !== '#' && href.length > 1) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const offsetTop = target.offsetTop - 70;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
     }
   });
 });
@@ -280,47 +285,49 @@ const techModal = document.getElementById('techModal');
 const modalClose = document.getElementById('modalClose');
 const modalBody = document.getElementById('modalBody');
 
-techCards.forEach(card => {
-  card.addEventListener('click', () => {
-    const tech = card.getAttribute('data-tech');
-    const info = techInfo[tech];
-    
-    if (info) {
-      modalBody.innerHTML = `
-        <div class="modal-icon">${info.icon}</div>
-        <h3>${info.name}</h3>
-        <p>${info.description}</p>
-        <div class="modal-features">
-          <h4>Key Capabilities</h4>
-          <ul>
-            ${info.features.map(feature => `<li>${feature}</li>`).join('')}
-          </ul>
-        </div>
-      `;
-      techModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+if (techCards && techModal && modalClose && modalBody) {
+  techCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const tech = card.getAttribute('data-tech');
+      const info = techInfo[tech];
+      
+      if (info) {
+        modalBody.innerHTML = `
+          <div class="modal-icon">${info.icon}</div>
+          <h3>${info.name}</h3>
+          <p>${info.description}</p>
+          <div class="modal-features">
+            <h4>Key Capabilities</h4>
+            <ul>
+              ${info.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+        techModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  modalClose.addEventListener('click', () => {
+    techModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  techModal.addEventListener('click', (e) => {
+    if (e.target === techModal) {
+      techModal.classList.remove('active');
+      document.body.style.overflow = '';
     }
   });
-});
 
-modalClose.addEventListener('click', () => {
-  techModal.classList.remove('active');
-  document.body.style.overflow = '';
-});
-
-techModal.addEventListener('click', (e) => {
-  if (e.target === techModal) {
-    techModal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && techModal.classList.contains('active')) {
-    techModal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-});
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && techModal.classList.contains('active')) {
+      techModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
 
 // ============================================
 // Intersection Observer for Animations
@@ -350,15 +357,17 @@ const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     const button = this.querySelector('button[type="submit"]');
-    const originalText = button.textContent;
-    
-    button.textContent = 'Sending...';
-    button.disabled = true;
-    
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.disabled = false;
-    }, 3000);
+    if (button) {
+      const originalText = button.textContent;
+      
+      button.textContent = 'Sending...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 3000);
+    }
   });
   
   const inputs = contactForm.querySelectorAll('input, select, textarea');
@@ -392,7 +401,8 @@ window.addEventListener('scroll', () => {
   
   navLinks.forEach(link => {
     link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
+    const href = link.getAttribute('href');
+    if (href && href.includes('#') && href.split('#')[1] === current) {
       link.classList.add('active');
     }
   });
@@ -441,8 +451,8 @@ if (heroImage) {
 // ============================================
 window.addEventListener('load', () => {
   const loadTime = performance.now();
-  console.log(`%cPortfolio loaded in ${Math.round(loadTime)}ms`, 'color: #06b6d4; font-size: 12px;');
-  console.log('%c👋 Welcome! Built by Israel Babalola', 'color: #06b6d4; font-size: 14px; font-weight: bold;');
+  console.log(`%cPortfolio loaded in ${Math.round(loadTime)}ms`, 'color: #0d9488; font-size: 12px;');
+  console.log('%c👋 Welcome! Built by Israel Babalola', 'color: #0d9488; font-size: 14px; font-weight: bold;');
 });
 
 // ============================================
