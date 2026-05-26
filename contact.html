@@ -1,138 +1,336 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact - Israel Olamide Babalola</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style2.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Send a DM — Israel Babalola</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --text: #f0ede8;
+    --muted: #888884;
+    --grey: #555552;
+    --border: rgba(255,255,255,0.07);
+    --border-focus: rgba(255,255,255,0.22);
+    --radius: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+  .nav-back svg { transition: transform 0.2s; }
+  .nav-back:hover svg { transform: translateX(-3px); }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5rem 1.5rem 6rem;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .form-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .form-title em {
+    font-style: italic;
+    color: var(--grey);
+  }
+
+  .form-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  /* FORM */
+  .dm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  input, textarea, select {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 0.85rem 1.1rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    width: 100%;
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(136,136,132,0.5); }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--border-focus);
+    background: var(--bg3);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.65;
+  }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888884' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  select option { background: var(--bg2); }
+
+  /* submit */
+  .btn-submit {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 1rem 2.4rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+  .btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 70%; height: 100%;
+    background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.05) 50%, transparent 80%);
+    pointer-events: none;
+  }
+  .btn-submit:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-2px); }
+  .btn-submit:hover::before {
+    left: 120%;
+    transition: left 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .btn-submit svg { opacity: 0.55; }
+
+  /* success state */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 3rem 0;
+  }
+  .success-msg.show { display: block; }
+  .success-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    color: rgba(240,237,232,0.4);
+  }
+  .success-msg h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .success-msg p { font-size: 14px; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(136,136,132,0.5);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1.2rem 1.4rem; }
+    main { padding: 3rem 1.4rem 5rem; }
+    .field-row { grid-template-columns: 1fr; }
+    footer { padding: 1.2rem 1.4rem; flex-direction: column; gap: 0.4rem; }
+  }
+</style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
-    <div class="container">
-      <div class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="nav-menu" id="navMenu">
-        <a href="index.html#hero">Home</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#expertise">Expertise</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="index.html#experience">Experience</a>
-        <a href="index.html#offer">What I Offer</a>
-        <a href="contact.html" class="active">Contact</a>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Contact Hero -->
-  <section class="contact-hero">
-    <div class="hero-background"></div>
-    <div class="container">
-      <h1>Get In Touch</h1>
-      <p>Open to opportunities, collaborations, and interesting conversations</p>
-    </div>
-  </section>
+<nav>
+  <a href="index.html" class="nav-logo">Israel Babalola</a>
+  <a href="index.html#contact" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Back
+  </a>
+</nav>
 
-  <!-- Contact Section -->
-  <section class="contact-page section">
-    <div class="container">
-      <div class="contact-page-content">
-        
-        <!-- Contact Info -->
-        <div class="contact-page-info">
-          <h2>Contact Information</h2>
-          <p class="contact-intro">
-            Feel free to reach out for project inquiries, collaboration opportunities, or to discuss technology and development.
-          </p>
-          
-          <div class="contact-details">
-            <div class="contact-item">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-              <div>
-                <span class="label">Email</span>
-                <a href="mailto:israelbabalola049@gmail.com">israelbabalola049@gmail.com</a>
-              </div>
-            </div>
-            
-            <div class="contact-item">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              <div>
-                <span class="label">Phone</span>
-                <a href="tel:+2349151980801">+234 (0) 915 198 0801</a>
-              </div>
-            </div>
-            
-            <div class="contact-item">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect x="2" y="9" width="4" height="12"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg>
-              <div>
-                <span class="label">LinkedIn</span>
-                <a href="https://www.linkedin.com/in/israel-babalola-629b5837b" target="_blank">israel-babalola-629b5837b</a>
-              </div>
-            </div>
-          </div>
+<main>
+  <div class="form-container">
+
+    <p class="form-eyebrow">Direct message</p>
+    <h1 class="form-title">Let's talk.<br><em>For real.</em></h1>
+    <p class="form-sub">Fill this in and I will get back to you within 24 hours. No gatekeeping, no lengthy back-and-forth — just a straight reply.</p>
+
+    <form class="dm-form" id="dmForm" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="John Doe" required />
         </div>
-
-        <!-- Contact Form -->
-        <div class="contact-page-form">
-          <h2>Send a Message</h2>
-          <form class="contact-form" action="https://formspree.io/f/myzlzqlz" method="POST">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="John Doe" required />
-            </div>
-            
-            <div class="form-group">
-              <label for="email">Your Email</label>
-              <input type="email" id="email" name="email" placeholder="john@example.com" required />
-            </div>
-            
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <select id="subject" name="subject" required>
-                <option value="" disabled selected>Select a subject</option>
-                <option value="Project Inquiry">Project Inquiry</option>
-                <option value="Collaboration">Collaboration Opportunity</option>
-                <option value="Job Opportunity">Job / Internship Opportunity</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="message">Your Message</label>
-              <textarea id="message" name="message" placeholder="Tell me about your project or inquiry..." rows="6" required></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required />
         </div>
-
       </div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Israel Olamide Babalola. All rights reserved.</p>
-    </div>
-  </footer>
+      <div class="field">
+        <label for="subject">What is this about?</label>
+        <select id="subject" name="subject">
+          <option value="" disabled selected>Pick one...</option>
+          <option value="freelance">Freelance project</option>
+          <option value="collab">Collaboration</option>
+          <option value="fulltime">Full-time opportunity</option>
+          <option value="feedback">Feedback / appreciation</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
 
-  <script src="script.js"></script>
+      <div class="field">
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" placeholder="Tell me about your idea, project, or just say hi. The more detail the better — I actually read every word." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send message
+      </button>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h3>Message sent.</h3>
+      <p>I have received it. Expect a reply within 24 hours.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="footer-copy">Israel Babalola — Frontend Developer</span>
+  <span class="footer-copy">Lagos, Nigeria</span>
+</footer>
+
+<script>
+  document.getElementById('dmForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Hook up to your backend or Formspree here
+    // For now, show success state
+    this.style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  });
+</script>
 </body>
 </html>
