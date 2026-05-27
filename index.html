@@ -212,6 +212,7 @@
   /* ===================== SECTIONS ===================== */
   .section-wrap { padding: 7rem 3rem; max-width: 1100px; margin: 0 auto; }
   .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+  .divider--full { max-width: 100%; }
 
   .section-tag {
     font-size: 11px;
@@ -237,29 +238,30 @@
 
   .section-watermark {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0;
-    pointer-events: none;
-    user-select: none;
-    will-change: transform;
-    z-index: 0;
+    justify-content: space-around;
+    padding: 1rem 0;
   }
 
-  .section-watermark span {
+  .section-watermark-row {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: clamp(72px, 16vw, 200px);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.038);
+    font-size: clamp(3.5rem, 9vw, 8.5rem);
+    color: rgba(255,255,255,0.055);
     white-space: nowrap;
-    line-height: 1.12;
-    display: block;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    user-select: none;
+    text-transform: uppercase;
+  }
+
+  .section-watermark-row:nth-child(even) {
+    margin-left: -3rem;
   }
 
   #about .section-wrap {
@@ -356,69 +358,114 @@
     margin-bottom: 2.5rem;
   }
 
-  .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .works-list { display: flex; flex-direction: column; }
 
-  .project-card {
-    position: relative;
-    overflow: hidden;
-    background: var(--bg2);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: var(--radius);
-    transition: border-color 0.5s ease, transform 0.4s ease;
+  .project-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
     text-decoration: none;
-    display: block;
+    padding: 2.8rem 0;
+    align-items: center;
   }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 70%;
-    height: 100%;
-    background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.03) 50%, transparent 80%);
-    pointer-events: none;
-    z-index: 2;
-  }
-  .project-card:hover { border-color: rgba(70,70,70,0.65); transform: translateY(-3px); }
-  .project-card:hover::before {
-    left: 120%;
-    transition: left 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  .project-row:last-child { border-bottom: 1px solid var(--border); }
+
+  .project-row-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding-right: 3rem;
   }
 
-  .project-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: var(--bg3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .project-row-date {
     font-size: 11px;
     letter-spacing: 0.1em;
-    color: #3a3a3a;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
+    color: var(--muted);
   }
-  .project-thumb::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg, transparent, transparent 20px,
-      rgba(255,255,255,0.012) 20px,
-      rgba(255,255,255,0.012) 21px
-    );
-  }
-  .project-info { padding: 1.2rem 1.4rem 1.4rem; }
-  .project-title {
+
+  .project-row-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
     font-weight: 400;
     color: var(--text);
-    margin-bottom: 0.45rem;
+    line-height: 1.15;
   }
-  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  .project-row-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 420px;
+  }
+
+  .project-row-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.6rem;
+    padding-top: 0;
+  }
+
+  .project-row-date {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--grey);
+    font-style: italic;
+  }
+
+  .btn-view {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.65rem 1.4rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    color: rgba(240,237,232,0.65);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-view::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.09) 50%, transparent 80%);
+    pointer-events: none;
+  }
+  .project-row:hover .btn-view {
+    border-color: rgba(255,255,255,0.3);
+    color: var(--text);
+  }
+  .project-row:hover .btn-view::before {
+    left: 130%;
+    transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .project-row-right {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--bg3);
+  }
+
+  .project-row-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+    transition: opacity 0.4s ease, transform 0.5s ease;
+  }
+  .project-row:hover .project-row-img { opacity: 1; transform: scale(1.04); }
 
   /* ===================== CONTACT ===================== */
   #contact {
@@ -436,7 +483,7 @@
 
   .contact-headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6.5vw, 5.8rem);
+    font-size: clamp(2rem, 4.5vw, 4rem);
     font-weight: 400;
     line-height: 1.04;
     letter-spacing: -0.02em;
@@ -544,33 +591,7 @@
     transform: translate(2px, -2px);
   }
 
-  /* ===================== FOOTER — half-cropped large text ===================== */
-  footer {
-    border-top: 1px solid var(--border);
-    overflow: hidden;
-    padding: 0;
-  }
 
-  .footer-marquee-wrap {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: clamp(40px, 7vw, 105px);
-    overflow: hidden;
-  }
-
-  .footer-static-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(5rem, 14vw, 18rem);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.055);
-    white-space: nowrap;
-    user-select: none;
-    line-height: 1;
-    transform: translateY(50%);
-  }
 
   /* ANIMATIONS */
   .fade-up {
@@ -604,12 +625,11 @@
     .hero-bottom { padding: 0 1.4rem 2.2rem; }
     .hero-headline { font-size: clamp(1.8rem, 9vw, 2.6rem); max-width: 100%; }
 
-    .works-grid { grid-template-columns: 1fr; }
+    .project-row { grid-template-columns: 1fr; gap: 1.4rem; padding: 2rem 0; }
+    .project-row-left { padding-right: 0; }
+    .project-row-right { aspect-ratio: 16/9; }
 
-    .footer-static-text { font-size: clamp(3.5rem, 11vw, 5rem); letter-spacing: 0.08em; }
-    .footer-marquee-wrap { height: clamp(30px, 8vw, 55px); }
-
-    .section-watermark span { font-size: clamp(40px, 11vw, 100px); line-height: 1.4; }
+    .section-watermark-row { font-size: clamp(2rem, 8vw, 4rem); }
   }
 
   @media (max-width: 420px) {
@@ -670,7 +690,13 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-watermark" id="aboutWatermark"><span>About Me</span><span>About Me</span><span>About Me</span></div>
+  <div class="section-watermark" id="aboutWatermark">
+    <div class="section-watermark-row">ABOUT ME &nbsp; ABOUT ME &nbsp; ABOUT ME</div>
+    <div class="section-watermark-row">ABOUT ME &nbsp; ABOUT ME &nbsp; ABOUT ME</div>
+    <div class="section-watermark-row">ABOUT ME &nbsp; ABOUT ME &nbsp; ABOUT ME</div>
+    <div class="section-watermark-row">ABOUT ME &nbsp; ABOUT ME &nbsp; ABOUT ME</div>
+    <div class="section-watermark-row">ABOUT ME &nbsp; ABOUT ME &nbsp; ABOUT ME</div>
+  </div>
   <div class="section-wrap">
     <div class="about-grid">
       <div class="about-image-box fade-up">
@@ -686,46 +712,68 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="divider divider--full"></div>
 
 <!-- WORKS -->
 <div class="section-wrap" id="works">
   <div class="works-header fade-up">
     <div class="works-label">Work</div>
   </div>
-  <div class="works-grid">
-    <a href="#" class="project-card fade-up d1">
-      <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80');background-size:cover;background-position:center;"></div>
-      <div class="project-info">
-        <div class="project-title">School Management System</div>
-        <p class="project-desc">A comprehensive admin, staff and student portal built for a Lagos primary school, featuring role-based access, academic records, and real-time data.</p>
+  <div class="works-list">
+
+    <a href="#" class="project-row fade-up d1">
+      <div class="project-row-left">
+        <div class="project-row-title">School Management System</div>
+        <p class="project-row-desc">A comprehensive admin, staff and student portal built for a Lagos primary school, featuring role-based access, academic records, and real-time data.</p>
+        <div class="project-row-footer">
+          <span class="btn-view">View project ↗</span>
+          <span class="project-row-date">March 2024</span>
+        </div>
+      </div>
+      <div class="project-row-right">
+        <img class="project-row-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="School Management System" />
       </div>
     </a>
-    <a href="#" class="project-card fade-up d2">
-      <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80');background-size:cover;background-position:center;"></div>
-      <div class="project-info">
-        <div class="project-title">Salon Landing Page</div>
-        <p class="project-desc">A polished single-page website for a Lagos hair salon, featuring custom brand identity, fluid animations, and a mobile-first responsive layout.</p>
+
+    <a href="#" class="project-row fade-up d2">
+      <div class="project-row-left">
+        <div class="project-row-title">Salon Landing Page</div>
+        <p class="project-row-desc">A polished single-page website for a Lagos hair salon, featuring custom brand identity, fluid animations, and a mobile-first responsive layout.</p>
+        <div class="project-row-footer">
+          <span class="btn-view">View project ↗</span>
+          <span class="project-row-date">August 2024</span>
+        </div>
+      </div>
+      <div class="project-row-right">
+        <img class="project-row-img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Salon Landing Page" />
       </div>
     </a>
-    <a href="#" class="project-card fade-up d3">
-      <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&q=80');background-size:cover;background-position:center;"></div>
-      <div class="project-info">
-        <div class="project-title">Client Project Three</div>
-        <p class="project-desc">Replace this with a real project title and description. Add a screenshot to the thumbnail above.</p>
+
+    <a href="#" class="project-row fade-up d3">
+      <div class="project-row-left">
+        <div class="project-row-title">Client Project Three</div>
+        <p class="project-row-desc">Replace this with a real project title and description. Add a screenshot to the thumbnail on the right.</p>
+        <div class="project-row-footer">
+          <span class="btn-view">View project ↗</span>
+          <span class="project-row-date">November 2023</span>
+        </div>
+      </div>
+      <div class="project-row-right">
+        <img class="project-row-img" src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&q=80" alt="Client Project Three" />
       </div>
     </a>
+
   </div>
 </div>
 
-<div class="divider"></div>
+<div class="divider divider--full"></div>
 
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap">
 
     <h2 class="contact-headline fade-up">
-      <em>Hit me up</em> <strong>asap</strong>
+      <em>Let's build</em> <strong>something</strong>
     </h2>
 
     <div class="contact-body">
@@ -784,13 +832,6 @@
   </div>
 </section>
 
-<!-- FOOTER — static large text -->
-<footer>
-  <div class="footer-marquee-wrap">
-    <div class="footer-static-text">Contact me</div>
-  </div>
-</footer>
-
 <script>
   // Nav scroll
   const navbar = document.getElementById('navbar');
@@ -822,20 +863,6 @@
     });
   }, { threshold: 0.1 });
   fadeEls.forEach(el => observer.observe(el));
-
-  // About watermark parallax
-  const aboutSection = document.getElementById('about');
-  const watermark = document.getElementById('aboutWatermark');
-  function updateWatermark() {
-    const rect = aboutSection.getBoundingClientRect();
-    const sectionH = aboutSection.offsetHeight;
-    const viewH = window.innerHeight;
-    const progress = 1 - (rect.bottom / (sectionH + viewH));
-    const drift = (progress - 0.5) * 90;
-    watermark.style.transform = `translate(-50%, calc(-50% + ${drift}px))`;
-  }
-  window.addEventListener('scroll', updateWatermark, { passive: true });
-  updateWatermark();
 </script>
 </body>
 </html>
