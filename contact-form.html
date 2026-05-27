@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Send a Message — Israel Babalola</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Send a DM</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,9 +23,9 @@
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     overflow: hidden;
+    -webkit-text-size-adjust: 100%;
   }
 
-  /* kill ALL browser chrome on textarea */
   textarea {
     -webkit-appearance: none;
     appearance: none;
@@ -39,14 +39,15 @@
   .chat-shell {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
+    height: -webkit-fill-available;
     max-width: 640px;
     margin: 0 auto;
   }
 
-  /* ── BACK ── */
   .chat-topbar {
     padding: 1.2rem 1.4rem 0.6rem;
+    padding-top: max(1.2rem, env(safe-area-inset-top, 1.2rem));
     flex-shrink: 0;
   }
   .back-btn {
@@ -62,15 +63,17 @@
     border-radius: 6px;
     padding: 0.42rem 0.85rem 0.42rem 0.65rem;
     transition: color 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
   }
   .back-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.14); }
-  .back-btn:hover svg { transform: translateX(-2px); }
+  .back-btn:hover svg, .back-btn:active svg { transform: translateX(-2px); }
   .back-btn svg { transition: transform 0.2s; }
 
-  /* ── MESSAGES ── */
   .chat-body {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 0.8rem 1.4rem 0.8rem;
     display: flex;
     flex-direction: column;
@@ -114,7 +117,6 @@
     color: var(--text);
   }
 
-  /* typing */
   .typing-wrap { align-self: flex-start; }
   .typing-bubble {
     background: #161616;
@@ -138,13 +140,12 @@
     30% { transform: translateY(-4px); opacity: 1; }
   }
 
-  /* final card */
   .final-card {
     align-self: center;
     margin-top: 0.8rem;
     border: 1px solid rgba(255,255,255,0.07);
     border-radius: 12px;
-    padding: 1.2rem 1.4rem;
+    padding: 1.4rem 1.6rem;
     text-align: center;
     background: #0f0f0f;
     max-width: 300px;
@@ -163,15 +164,8 @@
     font-weight: 400;
     font-size: 0.95rem;
     color: var(--text);
-    margin-bottom: 0.3rem;
-  }
-  .final-card p {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
   }
 
-  /* ── SUGGESTIONS (shown for subject step) ── */
   .suggestions {
     display: none;
     flex-wrap: wrap;
@@ -189,20 +183,21 @@
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition: border-color 0.2s, color 0.2s, background 0.2s;
   }
-  .suggestion:hover {
+  .suggestion:hover, .suggestion:active {
     border-color: rgba(255,255,255,0.18);
     color: var(--text);
     background: rgba(255,255,255,0.03);
   }
 
-  /* ── INPUT BAR ── */
   .chat-input-bar {
     display: flex;
     align-items: flex-end;
     gap: 8px;
     padding: 0.7rem 1.4rem 1.1rem;
+    padding-bottom: max(1.1rem, env(safe-area-inset-bottom, 1.1rem));
     border-top: 1px solid var(--border);
     background: var(--bg);
     flex-shrink: 0;
@@ -215,39 +210,39 @@
     border-radius: 10px;
     color: var(--text);
     font-family: 'Inter', sans-serif;
-    font-size: 13.5px;
     line-height: 1.55;
     padding: 0.62rem 0.9rem;
     outline: none;
-    resize: none;
+    resize: none !important;
     min-height: 42px;
     max-height: 110px;
     transition: border-color 0.2s;
     overflow: hidden;
     display: block;
     width: 100%;
-    /* kill webkit junk */
     -webkit-appearance: none;
     appearance: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    font-size: max(13.5px, 16px);
   }
   .chat-textarea::placeholder { color: #2e2e2c; }
   .chat-textarea:focus { border-color: rgba(255,255,255,0.13); }
+  .chat-textarea::-webkit-scrollbar { display: none; }
+  .chat-textarea::-webkit-resizer { display: none; }
 
   .send-btn {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: 42px; height: 42px; min-width: 42px;
     border-radius: 10px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.08);
     color: var(--muted);
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
   }
-  .send-btn:hover {
+  .send-btn:hover, .send-btn:active {
     background: rgba(255,255,255,0.09);
     color: var(--text);
     border-color: rgba(255,255,255,0.14);
@@ -259,14 +254,11 @@
   }
   .msg { animation: msgIn 0.22s ease forwards; }
 
-  @media (max-width: 480px) {
-    .msg { max-width: 84%; }
-  }
+  @media (max-width: 480px) { .msg { max-width: 84%; } }
 </style>
 </head>
 <body>
 <div class="chat-shell">
-
   <div class="chat-topbar">
     <a href="index.html#contact" class="back-btn">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
@@ -276,29 +268,20 @@
 
   <div class="chat-body" id="chatBody">
     <div class="chat-date" id="chatDate"></div>
-    <div class="msg from-them">
-      <div class="bubble">Hey, what's your name?</div>
-    </div>
+    <div class="msg from-them"><div class="bubble">Hey, what's your name?</div></div>
   </div>
 
-  <div class="suggestions" id="suggestions">
-    <button class="suggestion" onclick="useSuggestion(this)">Freelance project</button>
-    <button class="suggestion" onclick="useSuggestion(this)">Collaboration</button>
-    <button class="suggestion" onclick="useSuggestion(this)">Full-time opportunity</button>
-    <button class="suggestion" onclick="useSuggestion(this)">Just saying hi</button>
-    <button class="suggestion" onclick="useSuggestion(this)">Something else</button>
-  </div>
+  <div class="suggestions" id="suggestions"></div>
 
   <div class="chat-input-bar" id="inputBar">
     <textarea class="chat-textarea" id="chatInput" placeholder="Message..." rows="1"></textarea>
-    <button class="send-btn" onclick="handleSend()">
+    <button class="send-btn" id="sendBtn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </div>
-
 </div>
+
 <script>
-  // Date
   document.getElementById('chatDate').textContent = new Date().toLocaleDateString('en-GB', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   });
@@ -306,38 +289,793 @@
   const chatBody   = document.getElementById('chatBody');
   const chatInput  = document.getElementById('chatInput');
   const inputBar   = document.getElementById('inputBar');
-  const suggestions = document.getElementById('suggestions');
+  const suggestBox = document.getElementById('suggestions');
+  const sendBtn    = document.getElementById('sendBtn');
+
+  // Steps:
+  // 0 → name
+  // 1 → subject (category detected here)
+  // 2 → detail drill-down
+  // 3 → main message / full details
+  // 4 → timeline  [ONLY for: job, freelance, collab]
+  // 5 → email
+  // done
+
+  // Categories that skip the timeline step
+  const NO_TIMELINE_CATS = new Set(['hello', 'feedback', 'general', 'question', 'other']);
 
   let step = 0;
-  const data = { name: '', subject: '', message: '' };
-
-  // Varied, human reply pools
-  const nameReplies = (name) => pick([
-    `${name}, nice one. What brings you here?`,
-    `Good to meet you ${name}. What is this about?`,
-    `${name}. Got it. So what can I do for you?`,
-    `Hey ${name}. What is on your mind?`,
-  ]);
-
-  const subjectReplies = [
-    "Say less. Tell me more about it.",
-    "Alright, I am listening. Go ahead.",
-    "Okay. What would you like to say?",
-    "Got it. What do you want me to know?",
-    "Cool. Drop everything in the box below.",
-  ];
-
-  const finalReplies = [
-    "Received. I will get back to you within 24 hours.",
-    "Perfect. I will hit you back within the day.",
-    "Got it, thanks for reaching out. Give me 24 hours.",
-    "Message received. Talk soon.",
-    "Noted. I will be in touch within 24 hours.",
-  ];
+  let detectedCategory = '';
+  const data = { name: '', subject: '', detail: '', message: '', timeline: '', email: '' };
 
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-  // Auto-resize
+  function correlatedReply(input, replyMap, fallbacks) {
+    const lower = input.toLowerCase();
+    for (const [keywords, replies] of replyMap) {
+      if (keywords.some(k => lower.includes(k))) return pick(replies);
+    }
+    return pick(fallbacks);
+  }
+
+  function needsTimeline() {
+    return !NO_TIMELINE_CATS.has(detectedCategory);
+  }
+
+  function detectCategory(input) {
+    const t = input.toLowerCase();
+    if (/\b(job|role|position|full.?time|fulltime|opportunity|hiring|recruit|employ|vacancy|offer)\b/.test(t)) return 'job';
+    if (/\b(freelance|contract|build|develop|website|web|app|project|gig|commission|hire me|work together)\b/.test(t)) return 'freelance';
+    if (/\b(collab|collaboration|collaborate|partner|partnership|together|joint|co-create|team up|join forces)\b/.test(t)) return 'collab';
+    if (/\b(feedback|thoughts|opinion|portfolio|review|saw your|love your work|fan|admire|impressed|great work|nice work)\b/.test(t)) return 'feedback';
+    if (/\b(question|ask|wondering|curious|wanted to know|quick question|asking|advice|help me understand)\b/.test(t)) return 'question';
+    if (/\b(hi|hello|hey|just|checking|saying|introduce|know you|been following|following you|wave|reach out|say hi)\b/.test(t)) return 'hello';
+    if (/\b(idea|concept|thinking|vision|propose|proposal|pitch)\b/.test(t)) return 'collab';
+    return 'general';
+  }
+
+  // ── STEP 0: NAME ──
+  function nameReply(name) {
+    const first = name.split(' ')[0];
+    if (name.length <= 3) return pick([
+      `${name}. Got it. What can I do for you?`,
+      `${name}, okay. What is this about?`,
+      `${name}. Cool. What brings you here?`,
+      `${name}. Alright, talk to me.`,
+    ]);
+    if (name.includes(' ')) return pick([
+      `${first}, good to meet you. What is on your mind?`,
+      `Nice to meet you, ${first}. What can I help with?`,
+      `${first}. What brings you here today?`,
+      `${name} — got it. So what is the move?`,
+      `${first}. Always good. What is up?`,
+    ]);
+    return pick([
+      `${name}. Okay, what is this about?`,
+      `Good to meet you, ${name}. What is on your mind?`,
+      `${name}, what can I do for you?`,
+      `Hey ${name}. What brings you here?`,
+      `${name}, got it. So what are we working with?`,
+      `Nice. So ${name}, what is the move?`,
+      `${name}. What is up?`,
+      `Alright ${name}, talk to me.`,
+      `${name}. Good to meet you. What have you got?`,
+      `${name}, okay. What is going on?`,
+    ]);
+  }
+
+  // ── STEP 1: SUBJECT ──
+  function subjectReply(subject) {
+    const cat = detectedCategory;
+
+    if (cat === 'job') return correlatedReply(subject, [
+      [['frontend','react','vue','next','nuxt','ui','interface'],
+        [
+          "A frontend role, interesting. What is the company and what are they building?",
+          "Frontend dev opportunity. Who is it with and what does the stack look like?",
+          "Got it, frontend. Walk me through the role — company, team, what they are working on.",
+        ]
+      ],
+      [['backend','node','python','django','rails','api','server','database','postgres','mongo'],
+        [
+          "Backend role, noted. What company is this and what does the stack look like?",
+          "Okay, backend. Who is it with and what would I actually be building?",
+          "Got it. Walk me through it — company, team, what is the scope?",
+        ]
+      ],
+      [['fullstack','full stack','full-stack'],
+        [
+          "Fullstack, interesting. Who is the company and what does the product look like?",
+          "Full stack role, okay. What company is this and what are they building?",
+          "Got it. Tell me about the company and what the role involves.",
+        ]
+      ],
+      [['remote','hybrid','onsite','on-site','office','location'],
+        [
+          "Got the setup. Who is the company and what is the role exactly?",
+          "Noted the location. Who is it with and what would I be doing?",
+        ]
+      ],
+      [['senior','lead','head of','principal','staff','manager','director'],
+        [
+          "Senior-level, okay. Who is the company and what does the role scope look like?",
+          "Got it. What company is this with and what would the role actually involve?",
+          "Noted the seniority level. Walk me through the position.",
+        ]
+      ],
+      [['startup','early stage','seed','series'],
+        [
+          "Startup, interesting. What are they building and what is the role?",
+          "Early stage company — I like that. What is the role and what are they working on?",
+          "Okay, a startup. Walk me through the company and what they need.",
+        ]
+      ],
+    ], [
+      "A job opportunity, okay. What is the role and who is it with?",
+      "Interesting. Break it down for me — role, company, what they are looking for.",
+      "Got it. Walk me through the position.",
+      "A role, alright. What company are we talking and what is the scope?",
+      "Noted. What does the opportunity look like exactly?",
+      "Okay. Who is the company and what does the role involve?",
+      "Good to know. Tell me more — what is the position and who is hiring?",
+    ]);
+
+    if (cat === 'freelance') return correlatedReply(subject, [
+      [['website','site','landing page','portfolio','web','webpage'],
+        [
+          "Web project, got it. What kind of site — full build, redesign, or something specific?",
+          "Okay, a website. Who is it for and what is the goal of the project?",
+          "Sounds good. What does the site need to do and who is the audience?",
+          "Website build, okay. Is this from scratch or a redesign?",
+        ]
+      ],
+      [['app','mobile','ios','android','product','saas','platform','dashboard','tool'],
+        [
+          "An app project. Is this mobile, web-based, or both? What problem is it solving?",
+          "Interesting. What kind of app are we talking — what does it need to do?",
+          "App development, okay. Walk me through the concept.",
+          "Got it, a product. What is it and who is it for?",
+        ]
+      ],
+      [['design','ui','ux','brand','logo','visual','identity','figma'],
+        [
+          "Design work, noted. What specifically — UI, branding, full identity system?",
+          "Design-side, got it. What are you trying to build or rebrand?",
+          "Okay, design. What does the scope look like?",
+          "Got it. Is this UI for an existing product or something new?",
+        ]
+      ],
+      [['fix','bug','issue','broken','update','tweak','small change','quick'],
+        [
+          "A quick fix or update, got it. What is broken and what needs to happen?",
+          "Okay, sounds contained. What is the issue and where does it live?",
+          "Got it. Walk me through the problem.",
+        ]
+      ],
+    ], [
+      "Freelance, sounds good. What does the project look like?",
+      "Okay, tell me more about what needs to be built.",
+      "Love it. What is the scope and what are you trying to accomplish?",
+      "Got it. Walk me through the project — what is it, who is it for?",
+      "Freelance project, alright. What does it involve?",
+      "Good. What are we building and what does success look like?",
+      "Okay. What is the project and what do you need from me?",
+    ]);
+
+    if (cat === 'collab') return pick([
+      "Collaboration, interesting. What does that look like — what are you building and where do I come in?",
+      "Always open to the right collab. Tell me what you are thinking.",
+      "Collab could be cool. What is the concept and what would we each bring to it?",
+      "Okay, let's explore it. What is the project and what kind of collaboration are you imagining?",
+      "I am listening. What is it and how do you see us working together?",
+      "Interesting. What is the idea and what stage is it at?",
+      "Tell me about it. What are you working on and what are you looking for?",
+    ]);
+
+    if (cat === 'feedback') return pick([
+      "Feedback is always welcome. Was there something specific you wanted to say or ask about?",
+      "Appreciate you reaching out. What caught your attention — what did you want to share?",
+      "Cool, I want to hear it. What is on your mind?",
+      "Go ahead, what did you think?",
+      "Always good to hear from people who have been following the work. What is on your mind?",
+      "Say it. What stood out to you?",
+      "I am all ears. What did you want to share?",
+    ]);
+
+    if (cat === 'question') return pick([
+      "Of course, go ahead. What did you want to know?",
+      "Happy to answer. What is the question?",
+      "Sure. Ask away.",
+      "Go ahead. What did you want to ask?",
+      "What is the question?",
+      "Shoot. What is on your mind?",
+    ]);
+
+    if (cat === 'hello') return pick([
+      "Ha, no pressure. What is going on?",
+      "Love it. Anything specific on your mind or just wanted to connect?",
+      "Fair enough. What is up?",
+      "Good energy. What brought you here today?",
+      "Cool, always good to meet people. What is on your mind?",
+      "Hey. What is going on?",
+      "Appreciate you reaching out. What is the vibe?",
+    ]);
+
+    return pick([
+      "Say less. Tell me everything.",
+      "Alright, I am all ears. What have you got?",
+      "Okay, tell me more.",
+      "Got it. What do you want me to know?",
+      "Makes sense. What is the full picture?",
+      "Noted. Tell me more.",
+      "Interesting. Walk me through it.",
+      "Go on, I am listening.",
+    ]);
+  }
+
+  // ── STEP 2: DETAIL DRILL-DOWN ──
+  function detailReply(detail) {
+    const cat = detectedCategory;
+
+    if (cat === 'job') return correlatedReply(detail, [
+      [['startup','early stage','seed','series a','series b','small team','scrappy','new company'],
+        [
+          "Startup setup, got it. Tell me the full picture — comp range, remote situation, what I would actually be working on day to day.",
+          "Interesting environment. What are the full details — pay, team size, role scope?",
+          "Okay, sounds scrappy in a good way. What is the complete package — comp, team, expectations?",
+          "Early stage, I hear you. What does the opportunity look like in full?",
+        ]
+      ],
+      [['big company','corporate','enterprise','large','multinational','international','fortune','established'],
+        [
+          "Larger org, understood. What does the comp look like and what would the role actually involve?",
+          "Got the company scale. What is the opportunity in terms of comp, scope, and day-to-day?",
+          "Established company, got it. What are the full details?",
+        ]
+      ],
+      [['remote','fully remote','100% remote','distributed','anywhere'],
+        [
+          "Remote is a good sign. What is the comp and what would the role involve day to day?",
+          "Full remote works. What is the rest of the picture — pay, scope, what they are building?",
+          "Remote works for me. What does the full package look like?",
+        ]
+      ],
+      [['contract','short term','temp','6 month','3 month','one year','fixed term','part time'],
+        [
+          "Contract role, got it. What is the rate and what would the engagement look like?",
+          "Noted the contract setup. What are the full details — duration, scope, compensation?",
+          "Okay, contract basis. Walk me through the full scope and what the rate looks like.",
+        ]
+      ],
+      [['equity','stock','options','ownership','shares'],
+        [
+          "Got it. Tell me the full package — base, equity structure, scope of the role.",
+          "Equity in the mix, interesting. What does the full opportunity look like?",
+        ]
+      ],
+    ], [
+      "Got it. Give me the full picture — compensation, scope, what the team looks like.",
+      "Noted. What else — what is the pay, the team vibe, what would I actually be working on?",
+      "Okay. Tell me everything — comp range, expectations, remote situation, all of it.",
+      "Sounds interesting. What are the full details?",
+      "Got it. What does the full package look like?",
+      "Alright, give me everything. Role scope, comp, team culture.",
+      "Tell me the rest — comp, stack, what day-to-day actually looks like.",
+    ]);
+
+    if (cat === 'freelance') return correlatedReply(detail, [
+      [['client','for a client','someone else','third party','agency','on behalf'],
+        [
+          "Okay, client project. What is the timeline and do you have a budget in mind?",
+          "Got it. Client work. What is the scope and when does it need to be done?",
+          "Client side, understood. Give me the full brief — scope, deadline, budget.",
+          "Client project, noted. What does the brief look like and what is the turnaround?",
+        ]
+      ],
+      [['my own','personal','myself','our company','our team','startup','my business','our product'],
+        [
+          "Your own project, nice. What is the full scope and when are you looking to start?",
+          "Building something of your own, I like that. Tell me the full brief.",
+          "Own project. Give me the details — what needs building, when, and what the goal is.",
+          "Nice. What does the full project look like and when are you trying to ship?",
+        ]
+      ],
+      [['redesign','rebrand','refresh','update','revamp','overhaul'],
+        [
+          "Okay, a redesign. What exists now and what needs to change?",
+          "Revamp, got it. What is the current situation and what are you trying to achieve?",
+          "Redesign work. Tell me what is there now and what you want it to become.",
+          "Got it. What is the existing thing and what does the new version look like?",
+        ]
+      ],
+      [['mvp','minimum viable','prototype','proof of concept','v1','version one','first version'],
+        [
+          "MVP, understood. What are the core features and when do you need it by?",
+          "Okay, MVP mode. What is in scope for v1 and what is the timeline?",
+          "First version, got it. What needs to be in it and when are you trying to launch?",
+        ]
+      ],
+    ], [
+      "Got it. Tell me the full details — timeline, scope, what success looks like for you.",
+      "Okay. Give me everything — what needs to be done, the deadline, and any budget you have in mind.",
+      "Noted. Walk me through the full brief.",
+      "Good. What is the complete picture — deliverables, timeline, budget?",
+      "Sounds good. Drop all the details.",
+      "Got it. What does the full project look like?",
+      "Tell me everything. Scope, deadline, what you need from me.",
+    ]);
+
+    if (cat === 'collab') return correlatedReply(detail, [
+      [['early stage','just an idea','concept stage','rough','thinking','brainstorm','initial'],
+        [
+          "Still in concept mode, okay. Tell me everything you have so far and what you are looking for from me.",
+          "Okay, early days. What does the idea look like and where do you need support?",
+          "Got it. Lay out the full idea — what it is, what stage it is at, and how you see us working together.",
+          "Early stage, I hear you. What is the concept and where do I come in?",
+        ]
+      ],
+      [['in progress','already started','we have','built','existing','live','launched'],
+        [
+          "Something already in motion, interesting. Tell me where it stands and what role you are looking for me to play.",
+          "Got it, not starting from scratch. Tell me about the project and what you need.",
+          "Already underway, okay. What does it look like now and what are you missing?",
+        ]
+      ],
+      [['revenue','split','equity','deal','terms','arrangement','structure','compensation','paid'],
+        [
+          "Okay, you have thought about the structure. Tell me everything — what the project is, who is involved, and what you are proposing.",
+          "Got it. Walk me through the full thing — concept, stage, what the arrangement looks like.",
+        ]
+      ],
+    ], [
+      "Interesting. Who else is involved and what stage is this at?",
+      "Okay, I want to understand the full vision. What stage is the project and what does success look like?",
+      "Got it. Tell me everything — who is involved, what stage it is at, and what you need from me.",
+      "Cool. What does the project look like in detail and where do things stand right now?",
+      "Got it. Give me the full picture — concept, stage, your vision for how this works.",
+      "Alright. What is the full idea and what would my role actually be?",
+    ]);
+
+    if (cat === 'feedback') return correlatedReply(detail, [
+      [['project','specific','this one','that one','the one','piece','feature','page','section'],
+        [
+          "Got it. Tell me what you thought — what stood out, what worked, what didn't?",
+          "I want to hear it. Be honest, what was your read on it?",
+          "Okay, specific project. What did you actually think?",
+          "Go ahead. What landed and what did not?",
+        ]
+      ],
+      [['overall','in general','generally','broadly','as a whole','everything'],
+        [
+          "Overall impression, okay. What is the main thing that landed or didn't?",
+          "Got it. Give me the full picture — what worked, what could be better?",
+          "Overall read, got it. Tell me everything.",
+        ]
+      ],
+      [['loved','amazing','great','brilliant','fire','clean','impressive','incredible','nice'],
+        [
+          "That means a lot. Is there anything specific that stood out?",
+          "Appreciate it. What in particular caught you?",
+          "Good to hear. Anything specific you wanted to say about it?",
+        ]
+      ],
+      [['could be better','not sure','issue','problem','concern','thought about','suggestion','improvement'],
+        [
+          "Say it. I want to hear the honest take.",
+          "Go ahead. What did you notice?",
+          "Appreciated, always better to know. What is the concern?",
+          "Tell me. What would you change?",
+        ]
+      ],
+    ], [
+      "Got it. Tell me everything — what you thought, what you noticed, what you want to say.",
+      "I am all ears. Be as honest as you want.",
+      "Go ahead. What is the full take?",
+      "Good. Tell me what you really thought.",
+      "Lay it on me. What is the read?",
+      "What is the honest take?",
+    ]);
+
+    if (cat === 'question') return correlatedReply(detail, [
+      [['stack','tech','tools','languages','framework','built with','use','using'],
+        [
+          "Good question. Ask me whatever you want to know — I will give you an honest answer.",
+          "Tech question, okay. What specifically did you want to know?",
+          "Happy to talk stack. What is the question?",
+        ]
+      ],
+      [['process','workflow','how do you','approach','method','way you work'],
+        [
+          "Process question, I get those a lot. What specifically did you want to know?",
+          "Happy to walk through it. What part of the process are you curious about?",
+          "Good one. What specifically did you want to understand?",
+        ]
+      ],
+      [['available','availability','free','open','taking on','open to','accepting'],
+        [
+          "Good question. Tell me what you have in mind and I will let you know what is possible.",
+          "Depends on what the project is. Tell me what you have got.",
+          "Let's find out together. What is the opportunity?",
+        ]
+      ],
+    ], [
+      "Got it. Tell me everything — I want to make sure I give you a useful answer.",
+      "Okay. What do you want me to know before I answer?",
+      "Go ahead. What is the full context?",
+      "Drop the details and I will do my best.",
+      "I am listening. What else should I know?",
+      "What is the full picture?",
+    ]);
+
+    if (cat === 'hello') return correlatedReply(detail, [
+      [['followed','following','saw','seen','found','came across','discovered','stumbled'],
+        [
+          "Always good to connect. Is there anything specific on your mind or just wanted to reach out?",
+          "Glad you found the work. What did you want to say?",
+          "Cool, appreciate it. What brought you here today?",
+        ]
+      ],
+      [['work','portfolio','project','built','made','created','designed'],
+        [
+          "Good to hear. Was there something specific that caught your eye?",
+          "Appreciate it. What did you want to say about it?",
+          "Cool. What is on your mind?",
+        ]
+      ],
+      [['network','connect','linkedin','twitter','social','reach out','touch'],
+        [
+          "Always good to expand the network. What is on your mind?",
+          "Happy to connect. Is there anything specific you wanted to talk about?",
+          "Good energy. What brought you here?",
+        ]
+      ],
+    ], [
+      "Cool, always good to meet people. What is the main thing you wanted to get across?",
+      "Good energy. What else do you want me to know?",
+      "Appreciate it. What is on your mind?",
+      "Good stuff. What did you want to say?",
+      "Nice one. Anything else you wanted to share?",
+      "What is the vibe?",
+    ]);
+
+    // general
+    return correlatedReply(detail, [
+      [['actually','so basically','long story','context','background','to give you context','for context'],
+        [
+          "Got the context. Tell me everything — what is the full situation?",
+          "Appreciated. Now give me the full picture.",
+          "Okay, I am up to speed. What is the main thing you want me to know?",
+          "Good context. What is the actual ask?",
+        ]
+      ],
+      [['not sure','not really','kind of','sort of','maybe','i think','i guess','roughly'],
+        [
+          "No worries, we can figure it out. Tell me what you do know.",
+          "That is fine. Give me whatever you have and we will go from there.",
+          "Okay, even the rough idea is helpful. What have you got?",
+          "No stress. What do you know for certain?",
+        ]
+      ],
+    ], [
+      "Got it. Tell me the full story.",
+      "Okay, give me all the details.",
+      "Noted. What else should I know?",
+      "Good. Walk me through everything.",
+      "Received. What is the full picture?",
+      "Alright. Tell me everything.",
+      "Drop it all, I am listening.",
+      "Go on. What is the rest?",
+    ]);
+  }
+
+  // ── STEP 3: MAIN MESSAGE ──
+  function messageReply(message) {
+    const cat = detectedCategory;
+
+    // For non-timeline categories, this is the last content step before email
+    if (!needsTimeline()) {
+      if (cat === 'feedback') return correlatedReply(message, [
+        [['loved','great','amazing','clean','fire','impressive','best','brilliant','incredible'],
+          [
+            "That genuinely means a lot. What email should I reach you on?",
+            "Appreciate that, for real. Drop your email and I will say thanks properly.",
+            "Good to hear. What is your email?",
+          ]
+        ],
+        [['could be better','issue','problem','thing i noticed','suggestion','would change','improvement'],
+          [
+            "Honest feedback is the most useful kind. What email should I reach you on?",
+            "Appreciated, seriously. What is your email so I can follow up?",
+            "That is actually helpful to hear. What email works for you?",
+          ]
+        ],
+      ], [
+        "Good to hear that. What email should I reply to?",
+        "Appreciate you sharing that. What is your email?",
+        "Noted. What is the best email for you?",
+        "Thanks for the honesty. What email should I hit you back on?",
+        "Got it. Drop your email and I will follow up.",
+        "Received. What is your email address?",
+      ]);
+
+      if (cat === 'question') return correlatedReply(message, [
+        [['urgent','need to know','soon','quickly','asap','time sensitive'],
+          [
+            "Got it, I will get back to you fast. What is your email?",
+            "Understood. What email should I hit you back on?",
+          ]
+        ],
+      ], [
+        "Good question, I will get back to you properly. What is your email?",
+        "Noted. I will think it through and get back to you — what is your email?",
+        "Got it. Drop your email and I will reply.",
+        "I want to give you a proper answer. What email should I use?",
+        "Happy to answer that. What is your email address?",
+        "Got everything I need. What email should I reach you on?",
+      ]);
+
+      if (cat === 'hello') return correlatedReply(message, [
+        [['reach out','stay in touch','keep in contact','connect','network'],
+          [
+            "Same energy. Good to connect.",
+            "Always open. Appreciate you reaching out.",
+            "Good to meet you.",
+          ]
+        ],
+        [['loved','fan of','great work','following','inspired','appreciate','admire'],
+          [
+            "That means a lot. Genuinely.",
+            "Appreciate it. Good to hear.",
+            "Means more than you think.",
+          ]
+        ],
+      ], [
+        "Good to meet you.",
+        "Appreciate it.",
+        "Cool, good to hear.",
+        "Nice one. Appreciate you stopping by.",
+        "Good energy.",
+      ]);
+
+      // general
+      return pick([
+        "Got it. What email should I reach you on?",
+        "Received. What is your email address?",
+        "All noted. Drop your email and I will follow up.",
+        "Got it. What email works for you?",
+        "Makes sense. What is your email?",
+        "Understood. What email should I use?",
+      ]);
+    }
+
+    // Timeline categories (job, freelance, collab) — ask for timeline next
+    return correlatedReply(message, [
+      [['urgent','asap','immediately','right away','this week','rush','critical','time sensitive','deadline'],
+        [
+          "Got it, sounds time-sensitive. When are you trying to move on this?",
+          "Noted the urgency. What does the timeline look like exactly?",
+          "Understood. When do you need this by?",
+          "Fast turnaround, noted. What is the exact window?",
+        ]
+      ],
+      [['budget','rate','cost','price','charge','pay','paid','compensation','comp','money','invoice'],
+        [
+          "We can definitely talk numbers. When are you looking to get started?",
+          "Budget conversation, respect it. What is the timeline on your end?",
+          "Noted. When are you trying to kick things off?",
+          "Good that you are thinking about it. When are you looking to move?",
+        ]
+      ],
+      [['excited','love','amazing','huge fan','big fan','admire','your work','been following','fan of','impressed'],
+        [
+          "That genuinely means a lot. When are you thinking of moving on this?",
+          "Appreciate that, for real. What is the timeline looking like?",
+          "Good to hear. When do you want to get started?",
+          "Means a lot. What is the timeline on your end?",
+        ]
+      ],
+      [['idea','concept','vision','early stage','rough','thinking','prototype','mvp','v1'],
+        [
+          "Sounds like you have been thinking about this. When are you looking to move?",
+          "Interesting concept. What is the timeline on your end?",
+          "I want to hear more. When are you trying to get started?",
+          "Good foundation. When are you looking to kick it off?",
+        ]
+      ],
+      [['not much','not a lot','small','simple','quick','minor','small fix','small change','tiny','straightforward'],
+        [
+          "Small scope, got it. When are you looking to get this done?",
+          "Quick project, understood. What is the timeline?",
+          "Noted. When do you need it wrapped?",
+          "Okay, contained. When do you want to start?",
+        ]
+      ],
+      [['call','chat','meet','connect','schedule','zoom','google meet','teams','video','discovery','intro'],
+        [
+          "Sounds good, happy to chat. When are you looking to set that up?",
+          "A call works. What timeline are you working with?",
+          "Got it. When does that need to happen?",
+          "Happy to jump on a call. When are you thinking?",
+        ]
+      ],
+      [['long term','ongoing','retainer','recurring','months','year','extended','partnership'],
+        [
+          "Long-term engagement, noted. When do you want to get things started?",
+          "Ongoing work, understood. What is the kickoff timeline looking like?",
+          "Got it. When are you thinking of getting this underway?",
+          "Extended engagement, interesting. When are you looking to begin?",
+        ]
+      ],
+      [['split','revenue share','equity','stake','partnership deal','terms','structure','arrangement'],
+        [
+          "Okay, we can talk structure. When are you thinking of moving on this?",
+          "Noted. When are you looking to make this happen?",
+          "Got it. When would you want to kick things off?",
+        ]
+      ],
+    ], [
+      "Got it. When are you looking to get moving on this?",
+      "Received. What is the timeline looking like?",
+      "All noted. When are you trying to kick things off?",
+      "Okay. When do you want to start?",
+      "Perfect. What is your timeline on this?",
+      "Cool. When are you thinking?",
+      "Makes sense. What is the timeframe on your end?",
+      "Understood. When would you want this to happen?",
+      "Good. What does the timeline look like?",
+      "Noted. When are you trying to move?",
+    ]);
+  }
+
+  // ── STEP 4: TIMELINE (only reached for job/freelance/collab) ──
+  function timelineReply(timeline) {
+    return correlatedReply(timeline, [
+      [['today','tomorrow','now','asap','right now','this week','monday','tuesday','wednesday','thursday','friday','urgent','immediately','as soon'],
+        [
+          "Short timeline, understood. What email should I reach you on?",
+          "Okay, moving fast then. What is your email?",
+          "Got it, time is a factor. What email works for you?",
+          "Fast turnaround, noted. Drop your email and I will get back to you quickly.",
+          "Moving quickly, got it. What is your email?",
+        ]
+      ],
+      [['next week','couple weeks','two weeks','few weeks','couple of weeks'],
+        [
+          "Next couple of weeks, got it. What email should I reply to?",
+          "That works. What is your email?",
+          "Okay, not too far out. What email should I use?",
+          "Good window. What is your email address?",
+        ]
+      ],
+      [['month','within a month','next month','end of month','30 days','four weeks'],
+        [
+          "Good, that gives us some room. What is your email address?",
+          "No rush then. What email should I reply to?",
+          "A month out, noted. Drop your email and we will take it from there.",
+          "Good amount of runway. What email should I use?",
+        ]
+      ],
+      [['flexible','no rush','whenever','open','anytime','not urgent','chill','relaxed','up to you','whenever works','open to'],
+        [
+          "Flexible timeline, that works. What email should I reach you on?",
+          "No stress then. What is your email?",
+          "Good, no pressure. Drop your email and we will figure it out.",
+          "Flexible works for me too. What email should I use?",
+          "No pressure. What is your email?",
+        ]
+      ],
+      [['not sure','unsure','depends','maybe','possibly','figure out','to be decided','tbd','not decided','not yet'],
+        [
+          "That is fine, we can work it out. What is your email?",
+          "No worries, we can sort that out. What email should I use?",
+          "Understood. Drop your email and we will pick it up from there.",
+          "We can figure out the timeline together. What is your email?",
+          "No problem. What is your email address?",
+        ]
+      ],
+      [['quarter','q1','q2','q3','q4','end of year','year end','few months','couple months','couple of months'],
+        [
+          "Longer horizon, got it. What email should I reach you on?",
+          "Noted, we have some runway. What is your email address?",
+          "Good to know. What email works for you?",
+          "Okay, planning ahead. What is your email?",
+        ]
+      ],
+    ], [
+      "Got it. What email should I reach you on?",
+      "Noted. What is the best email for you?",
+      "Makes sense. Drop your email and I will be in touch.",
+      "Good. What is your email address?",
+      "Okay, what email works for you?",
+      "Got the timeline. What is your email?",
+      "Received. What email should I hit you back on?",
+      "Perfect. What is your email?",
+    ]);
+  }
+
+  // ── EMAIL CONFIRM ──
+  function emailConfirmReply(email) {
+    const lower = email.toLowerCase();
+    if (lower.includes('gmail')) return pick([
+      "Got it, I will hit you back on Gmail. Talk soon.",
+      "Perfect, got everything I need. You will hear from me.",
+      "Gmail, noted. I will be in touch within 24 hours.",
+      "All good. Expect something in your inbox soon.",
+      "Got it. Talk soon.",
+    ]);
+    if (lower.includes('yahoo')) return pick([
+      "Yahoo, noted. You will hear from me soon.",
+      "Got it. I will reach out within 24 hours.",
+      "Perfect. Talk soon.",
+      "Noted. I will be in touch.",
+    ]);
+    if (lower.includes('outlook') || lower.includes('hotmail') || lower.includes('microsoft')) return pick([
+      "Got it. I will reach out on Outlook. Talk soon.",
+      "Perfect. You will hear from me within 24 hours.",
+      "Outlook, noted. Talk soon.",
+    ]);
+    if (lower.includes('icloud')) return pick([
+      "iCloud, got it. I will be in touch soon.",
+      "Perfect. Expect something from me within a day.",
+      "Got it. Talk soon.",
+    ]);
+    if (lower.includes('proton') || lower.includes('protonmail')) return pick([
+      "ProtonMail, noted. I will reach out soon.",
+      "Got it. You will hear from me within 24 hours.",
+      "ProtonMail, got it. Talk soon.",
+    ]);
+    return pick([
+      "Perfect, got everything I need. You will hear from me within 24 hours.",
+      "Got it, I will be in touch. Talk soon.",
+      "Received. I will hit you back within the day.",
+      "All good, you will hear from me. Talk soon.",
+      "Noted. Give me a day and I will reach out.",
+      "Got it. I will be in touch shortly.",
+      "Perfect. Talk soon.",
+      "Received, all noted. Talk soon.",
+    ]);
+  }
+
+  // ── SUGGESTIONS PER STEP ──
+  const stepSuggestions = {
+    1: ['Full-time opportunity', 'Freelance project', 'Collaboration', 'Feedback', 'Just saying hi', 'Got a question'],
+    2: {
+      job:      ['Frontend role', 'Backend role', 'Fullstack role', 'Design role'],
+      freelance:['Website build', 'Web app', 'UI/UX design', 'Full product'],
+      collab:   ['Creative project', 'Tech project', 'Content collab', 'Business venture'],
+      feedback: ['Loved the work', 'Had a thought', 'Something specific', 'Overall impression'],
+      question: ['About your stack', 'About your process', 'Availability', 'Something else'],
+      hello:    ['Been following your work', 'Came across your portfolio', 'Just wanted to connect'],
+      general:  ['Have a question', 'Have an idea', 'Need some help'],
+    },
+    3: [],
+    4: ['This week', 'Next week', 'Within a month', 'Flexible', 'Not sure yet'],
+    5: [],
+  };
+
+  function showSuggestions(stepNum) {
+    suggestBox.innerHTML = '';
+    // 'email' sentinel or explicit null = no suggestions
+    if (stepNum === 'email' || stepNum === null) { suggestBox.classList.remove('show'); return; }
+    let items = [];
+    if (stepNum === 2) {
+      const map = stepSuggestions[2];
+      items = map[detectedCategory] || map['general'];
+    } else {
+      items = stepSuggestions[stepNum] || [];
+    }
+    if (!items.length) { suggestBox.classList.remove('show'); return; }
+    items.forEach(label => {
+      const btn = document.createElement('button');
+      btn.className = 'suggestion';
+      btn.textContent = label;
+      btn.addEventListener('click', () => { chatInput.value = label; chatInput.focus(); });
+      suggestBox.appendChild(btn);
+    });
+    suggestBox.classList.add('show');
+  }
+
+  // ── TEXTAREA AUTO-RESIZE ──
   chatInput.addEventListener('input', function () {
     this.style.height = 'auto';
     this.style.height = Math.min(this.scrollHeight, 110) + 'px';
@@ -345,10 +1083,9 @@
   chatInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
   });
+  sendBtn.addEventListener('click', handleSend);
 
-  function scrollBottom() {
-    setTimeout(() => { chatBody.scrollTop = chatBody.scrollHeight; }, 40);
-  }
+  function scrollBottom() { setTimeout(() => { chatBody.scrollTop = chatBody.scrollHeight; }, 40); }
 
   function addBubble(text, side) {
     const msg = document.createElement('div');
@@ -362,7 +1099,6 @@
     await wait(delay);
     const wrap = document.createElement('div');
     wrap.className = 'msg from-them typing-wrap';
-    wrap.id = 'typingEl';
     wrap.innerHTML = `<div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
     chatBody.appendChild(wrap);
     scrollBottom();
@@ -377,60 +1113,121 @@
 
   function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+  function hideInput() { inputBar.style.display = 'none'; suggestBox.classList.remove('show'); }
+  function showInput(placeholder) {
+    chatInput.placeholder = placeholder;
+    inputBar.style.display = 'flex';
+    setTimeout(() => chatInput.focus(), 60);
+  }
+
+  // email step index is dynamic — track it
+  let emailStep = 5; // default with timeline
+  // gets recalculated after category is known
+
   async function handleSend() {
     const val = chatInput.value.trim();
     if (!val) return;
     chatInput.value = '';
     chatInput.style.height = 'auto';
+    suggestBox.classList.remove('show');
+    addBubble(escHtml(val), 'me');
+    hideInput();
 
     if (step === 0) {
       data.name = val;
       step = 1;
-      addBubble(escHtml(val), 'me');
-      inputBar.style.display = 'none';
-      await themSays(nameReplies(escHtml(data.name)), 350, 750);
-      suggestions.classList.add('show');
-      chatInput.placeholder = 'Message...';
-      inputBar.style.display = 'flex';
-      setTimeout(() => chatInput.focus(), 60);
+      await themSays(nameReply(escHtml(data.name)), 350, 750);
+      showSuggestions(1);
+      showInput('What is this about?');
 
     } else if (step === 1) {
-      // free-type subject
       data.subject = val;
+      detectedCategory = detectCategory(val);
+      // recalc email step based on category
+      emailStep = needsTimeline() ? 5 : 4;
       step = 2;
-      suggestions.classList.remove('show');
-      addBubble(escHtml(val), 'me');
-      inputBar.style.display = 'none';
-      await themSays(pick(subjectReplies), 350, 700);
-      chatInput.placeholder = 'Type your message...';
-      inputBar.style.display = 'flex';
-      setTimeout(() => chatInput.focus(), 60);
+      await themSays(subjectReply(val), 350, 850);
+      showSuggestions(2);
+      showInput('Tell me more...');
 
     } else if (step === 2) {
-      data.message = val;
+      data.detail = val;
       step = 3;
-      addBubble(escHtml(val), 'me');
-      inputBar.style.display = 'none';
-      await themSays(pick(finalReplies), 500, 900);
-      // Final card
-      await wait(600);
+      await themSays(detailReply(val), 380, 900);
+      showSuggestions(3);
+      showInput('Tell me everything...');
+
+    } else if (step === 3) {
+      data.message = val;
+      if (detectedCategory === 'hello') {
+        // hello — no timeline, no email, just wrap up
+        step = 99;
+        const helloReply = pick([
+          "Good to hear from you. Appreciate you stopping by.",
+          "Nice one. Always good to connect.",
+          "Appreciated. Take care.",
+          "Same energy. Good to meet you.",
+          "Good stuff. Take it easy.",
+        ]);
+        await themSays(helloReply, 400, 800);
+        await wait(900);
+        const card = document.createElement('div');
+        card.className = 'final-card';
+        card.innerHTML = `
+          <div class="final-card-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h4>Message delivered.</h4>
+        `;
+        chatBody.appendChild(card);
+        scrollBottom();
+        await wait(2800);
+        window.location.href = 'index.html';
+      } else if (needsTimeline()) {
+        step = 4;
+        await themSays(messageReply(val), 400, 900);
+        showSuggestions(4);
+        showInput('Timeline or availability...');
+      } else {
+        // feedback, question, general — skip timeline, go to email
+        step = emailStep; // = 4
+        await themSays(messageReply(val), 400, 900);
+        showSuggestions('email');
+        showInput('Your email address...');
+      }
+
+    } else if (step === 4 && needsTimeline()) {
+      // this is the timeline step for job/freelance/collab
+      data.timeline = val;
+      step = 5;
+      await themSays(timelineReply(val), 400, 850);
+      showSuggestions('email');
+      showInput('Your email address...');
+
+    } else if (step === emailStep || (step === 5 && needsTimeline())) {
+      // email step
+      data.email = val;
+      if (!val.includes('@') || !val.includes('.')) {
+        await themSays("Hmm, that does not look right. Can you double-check your email?", 400, 700);
+        showInput('Your email address...');
+        return;
+      }
+      step = 99; // done
+      await themSays(emailConfirmReply(val), 500, 950);
+      await wait(900);
       const card = document.createElement('div');
       card.className = 'final-card';
       card.innerHTML = `
         <div class="final-card-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
-        <h4>You are all set.</h4>
-        <p>israelbabalola049@gmail.com</p>
+        <h4>Message delivered.</h4>
       `;
       chatBody.appendChild(card);
       scrollBottom();
+      await wait(2800);
+      window.location.href = 'index.html';
     }
-  }
-
-  function useSuggestion(btn) {
-    chatInput.value = btn.textContent;
-    chatInput.focus();
   }
 
   function escHtml(str) {
