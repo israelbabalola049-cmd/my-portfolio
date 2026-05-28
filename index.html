@@ -462,6 +462,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
     opacity: 0.75;
     transition: opacity 0.4s ease, transform 0.5s ease;
   }
@@ -591,8 +592,6 @@
     transform: translate(2px, -2px);
   }
 
-
-
   /* ANIMATIONS */
   .fade-up {
     opacity: 0;
@@ -608,7 +607,7 @@
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-image-box { aspect-ratio: 4/3; max-width: 420px; }
+    .about-image-box { max-width: 420px; }
     .contact-body { grid-template-columns: 1fr; gap: 3rem; }
   }
 
@@ -721,17 +720,18 @@
   </div>
   <div class="works-list">
 
-    <a href="#" class="project-row fade-up d1">
+    <!-- DEBSTEPH HALL SCHOOL PORTAL -->
+    <a href="https://debstephhallschool.onrender.com" class="project-row fade-up d1" target="_blank" rel="noopener">
       <div class="project-row-left">
-        <div class="project-row-title">School Management System</div>
-        <p class="project-row-desc">A comprehensive admin, staff and student portal built for a Lagos primary school, featuring role-based access, academic records, and real-time data.</p>
+        <div class="project-row-title">Debsteph Hall School Portal</div>
+        <p class="project-row-desc">A full-stack school management system built for a Lagos primary school. Three separate portals — admin, staff, and student — with role-based access, live academic records, class promotions, and a real-time analytics dashboard.</p>
         <div class="project-row-footer">
           <span class="btn-view">View project ↗</span>
-          <span class="project-row-date">March 2024</span>
+          <span class="project-row-date">March 2025</span>
         </div>
       </div>
       <div class="project-row-right">
-        <img class="project-row-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="School Management System" />
+        <img class="project-row-img" src="image.png" alt="Debsteph Hall School Portal" />
       </div>
     </a>
 
@@ -784,7 +784,6 @@
           No idea is too rough, no brief is too early. I genuinely do not mind the work. Whether you are bringing a fully-scoped project or just a feeling you cannot yet put into words, reach out and let us figure it out together. Good work starts with a conversation, so do not sit on it.
         </p>
 
-        <!-- DM button -->
         <a href="contact-form.html" class="btn-dm">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
